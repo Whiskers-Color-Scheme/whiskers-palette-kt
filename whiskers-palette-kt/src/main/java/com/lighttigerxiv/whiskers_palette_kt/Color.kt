@@ -50,7 +50,7 @@ enum class WhiskersColor {
     PantherNeutral,
     PantherNeutralTwo,
     PantherNeutralThree,
-    PantherNeutralFor,
+    PantherNeutralFour,
     PantherNeutralFive,
     PantherNeutralSix,
     PantherNeutralSeven,
@@ -58,7 +58,7 @@ enum class WhiskersColor {
     PantherText,
     PantherTextTwo,
     PantherTextThree,
-    PantherTextFor,
+    PantherTextFour,
     TigerBanana,
     TigerBlueberry,
     TigerCherry,
@@ -68,7 +68,7 @@ enum class WhiskersColor {
     TigerNeutral,
     TigerNeutralTwo,
     TigerNeutralThree,
-    TigerNeutralFor,
+    TigerNeutralFour,
     TigerNeutralFive,
     TigerNeutralSix,
     TigerNeutralSeven,
@@ -76,7 +76,7 @@ enum class WhiskersColor {
     TigerText,
     TigerTextTwo,
     TigerTextThree,
-    TigerTextFor
+    TigerTextFour
 }
 
 fun getColor(color: WhiskersColor): Color{
@@ -90,7 +90,7 @@ fun getColor(color: WhiskersColor): Color{
         WhiskersColor.PantherNeutral -> getPantherPalette().neutral
         WhiskersColor.PantherNeutralTwo -> getPantherPalette().neutralTwo
         WhiskersColor.PantherNeutralThree -> getPantherPalette().neutralThree
-        WhiskersColor.PantherNeutralFor -> getPantherPalette().neutralFor
+        WhiskersColor.PantherNeutralFour -> getPantherPalette().neutralFour
         WhiskersColor.PantherNeutralFive -> getPantherPalette().neutralFive
         WhiskersColor.PantherNeutralSix -> getPantherPalette().neutralSix
         WhiskersColor.PantherNeutralSeven -> getPantherPalette().neutralSeven
@@ -98,7 +98,7 @@ fun getColor(color: WhiskersColor): Color{
         WhiskersColor.PantherText -> getPantherPalette().text
         WhiskersColor.PantherTextTwo -> getPantherPalette().textTwo
         WhiskersColor.PantherTextThree -> getPantherPalette().textThree
-        WhiskersColor.PantherTextFor -> getPantherPalette().textFor
+        WhiskersColor.PantherTextFour -> getPantherPalette().textFour
         WhiskersColor.TigerBanana -> getTigerPalette().banana
         WhiskersColor.TigerBlueberry -> getTigerPalette().blueberry
         WhiskersColor.TigerCherry -> getTigerPalette().cherry
@@ -108,7 +108,7 @@ fun getColor(color: WhiskersColor): Color{
         WhiskersColor.TigerNeutral -> getTigerPalette().neutral
         WhiskersColor.TigerNeutralTwo -> getTigerPalette().neutralTwo
         WhiskersColor.TigerNeutralThree -> getTigerPalette().neutralThree
-        WhiskersColor.TigerNeutralFor -> getTigerPalette().neutralFor
+        WhiskersColor.TigerNeutralFour -> getTigerPalette().neutralFour
         WhiskersColor.TigerNeutralFive -> getTigerPalette().neutralFive
         WhiskersColor.TigerNeutralSix -> getTigerPalette().neutralSix
         WhiskersColor.TigerNeutralSeven -> getTigerPalette().neutralSeven
@@ -116,6 +116,6 @@ fun getColor(color: WhiskersColor): Color{
         WhiskersColor.TigerText -> getTigerPalette().text
         WhiskersColor.TigerTextTwo -> getTigerPalette().textTwo
         WhiskersColor.TigerTextThree -> getTigerPalette().textThree
-        WhiskersColor.TigerTextFor -> getTigerPalette().textFor
+        WhiskersColor.TigerTextFour -> getTigerPalette().textFour
     }
 }

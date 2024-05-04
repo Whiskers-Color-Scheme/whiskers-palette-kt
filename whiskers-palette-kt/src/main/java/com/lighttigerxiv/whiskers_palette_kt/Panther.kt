@@ -147,7 +147,7 @@ const val PANTHER_JSON = """
     }
   },
   {
-    "name": "NeutralFor",
+    "name": "NeutralFour",
     "hex": "#1B0B00",
     "rgb": {
       "r": "27",
@@ -275,7 +275,7 @@ const val PANTHER_JSON = """
     }
   },
   {
-    "name": "TextFor",
+    "name": "TextFour",
     "hex": "#B5A8A0",
     "rgb": {
       "r": "181",

@@ -147,7 +147,7 @@ const val TIGER_JSON = """
     }
   },
   {
-    "name": "NeutralFor",
+    "name": "NeutralFour",
     "hex": "#FFF3E2",
     "rgb": {
       "r": "255",
@@ -275,7 +275,7 @@ const val TIGER_JSON = """
     }
   },
   {
-    "name": "TextFor",
+    "name": "TextFour",
     "hex": "#AE917C",
     "rgb": {
       "r": "174",

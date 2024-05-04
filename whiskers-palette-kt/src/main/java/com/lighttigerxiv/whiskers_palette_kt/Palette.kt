@@ -1,9 +1,6 @@
 package com.lighttigerxiv.whiskers_palette_kt
 
 import com.google.gson.Gson
-import java.io.File
-import kotlin.io.path.Path
-import kotlin.io.path.absolutePathString
 
 /**
  * An object containing all Whiskers Colors
@@ -18,7 +15,7 @@ data class Palette(
     val neutral: Color,
     val neutralTwo: Color,
     val neutralThree: Color,
-    val neutralFor: Color,
+    val neutralFour: Color,
     val neutralFive: Color,
     val neutralSix: Color,
     val neutralSeven: Color,
@@ -26,7 +23,7 @@ data class Palette(
     val text: Color,
     val textTwo: Color,
     val textThree: Color,
-    val textFor: Color
+    val textFour: Color
 )
 
 
@@ -56,7 +53,7 @@ private fun getPalette(json: String): Palette{
         neutral = colors[6],
         neutralTwo = colors[7],
         neutralThree = colors[8],
-        neutralFor = colors[9],
+        neutralFour = colors[9],
         neutralFive = colors[10],
         neutralSix = colors[11],
         neutralSeven = colors[12],
@@ -64,7 +61,7 @@ private fun getPalette(json: String): Palette{
         text = colors[14],
         textTwo = colors[15],
         textThree = colors[16],
-        textFor = colors[17]
+        textFour = colors[17]
     )
 }
 

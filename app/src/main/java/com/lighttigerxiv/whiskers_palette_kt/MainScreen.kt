@@ -41,7 +41,7 @@ fun MainScreen(vm: MainViewModel = viewModel()) {
     val uiState = vm.uiState.collectAsState().value
     val textColor = getComposeColor(uiState.palette.text)
     val neutralTwoColor = getComposeColor(uiState.palette.neutralTwo)
-    val neutralForColor = getComposeColor(uiState.palette.neutralFor)
+    val neutralForColor = getComposeColor(uiState.palette.neutralFour)
 
     ChangeStatusBarColor(color = neutralTwoColor)
     ChangeNavigationBarsColor(color = neutralForColor)
@@ -52,7 +52,7 @@ fun MainScreen(vm: MainViewModel = viewModel()) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .background(getComposeColor(uiState.palette.neutralFor)),
+                    .background(getComposeColor(uiState.palette.neutralFour)),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -194,7 +194,7 @@ fun MainScreen(vm: MainViewModel = viewModel()) {
 
                 Spacer(modifier = Modifier.height(16.dp))
                 ColorPreview(
-                    paletteColor = uiState.palette.neutralFor,
+                    paletteColor = uiState.palette.neutralFour,
                     background = neutralForColor,
                     textColor = textColor,
                     secondaryBackground = neutralTwoColor,
@@ -266,7 +266,7 @@ fun MainScreen(vm: MainViewModel = viewModel()) {
 
                 Spacer(modifier = Modifier.height(16.dp))
                 ColorPreview(
-                    paletteColor = uiState.palette.textFor,
+                    paletteColor = uiState.palette.textFour,
                     background = neutralForColor,
                     textColor = textColor,
                     secondaryBackground = neutralTwoColor,
