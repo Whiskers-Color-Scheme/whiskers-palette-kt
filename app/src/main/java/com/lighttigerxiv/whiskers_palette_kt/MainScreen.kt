@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -91,7 +93,49 @@ fun MainScreen(vm: MainViewModel = viewModel()) {
             }
         },
         landscapeNavigationBar = {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(100.dp)
+                    .background(getComposeColor(uiState.palette.neutralFour)),
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .weight(1f, fill = true)
+                        .clickable { vm.switchToPanther() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    NavbarTab(
+                        iconId = R.drawable.panther,
+                        text = "Panther",
+                        active = uiState.tab == 0,
+                        textColor = textColor,
+                        vertical = true
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .weight(1f, fill = true)
+                        .clickable { vm.switchToTiger() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    NavbarTab(
+                        iconId = R.drawable.tiger,
+                        text = "Tiger",
+                        active = uiState.tab == 1,
+                        textColor = textColor,
+                        vertical = true
+                    )
+                }
+            }
         }
     ) { isTablet, inLandscape ->
 
@@ -283,26 +327,52 @@ fun NavbarTab(
     text: String,
     active: Boolean,
     textColor: Color,
+    vertical: Boolean = false
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            modifier = Modifier.size(28.dp),
-            painter = painterResource(id = iconId),
-            contentDescription = null,
-            tint = textColor
-        )
+    if(vertical){
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                modifier = Modifier.size(28.dp),
+                painter = painterResource(id = iconId),
+                contentDescription = null,
+                tint = textColor
+            )
 
-        Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
-            color = textColor,
-            fontWeight = if (active) FontWeight.Bold else FontWeight.Normal
-        )
+            Text(
+                text = text,
+                fontSize = 20.sp,
+                color = textColor,
+                fontWeight = if (active) FontWeight.Bold else FontWeight.Normal
+            )
+        }
+    } else{
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.size(28.dp),
+                painter = painterResource(id = iconId),
+                contentDescription = null,
+                tint = textColor
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = text,
+                fontSize = 20.sp,
+                color = textColor,
+                fontWeight = if (active) FontWeight.Bold else FontWeight.Normal
+            )
+        }
     }
+
+
 }
 
 @Composable
