@@ -78,10 +78,17 @@ val l = color.l
 
 ## Android App
 This repo also provides an android app for getting the palette. It can be download in the [releases](https://github.com/Whiskers-Color-Scheme/whiskers-palette-kt/releases) page
+<div>
+<img src="https://github.com/user-attachments/assets/b2d04a5b-ed66-4e8f-bd2a-78e83c2b4468" width="200">
+<img src="https://github.com/user-attachments/assets/217f2856-14b8-4015-8e44-7c13844e3638" width="200">
+</div>
+<br>
+<div>
+<img src="https://github.com/user-attachments/assets/149f542c-fa99-4102-ac45-a8dda2ff6a3c" width="400">    
+<img src="https://github.com/user-attachments/assets/d9f2bd7e-57e6-4608-a3ce-a069901e06a5" width="400">    
+</div>
 
-<img src="https://github.com/Whiskers-Color-Scheme/whiskers-palette-kt/assets/35658492/4dd89e00-734f-4f45-938d-f6479383470c" width="200">
 
-<img src="https://github.com/Whiskers-Color-Scheme/whiskers-palette-kt/assets/35658492/cc24b140-98c0-4ec2-a549-04e5a1c33ba5" width="200">
 
 
 
