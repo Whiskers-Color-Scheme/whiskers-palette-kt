@@ -29,7 +29,7 @@ publishing {
             artifactId = "whiskers-palette-kt"
 
             // Version Library Name (Example : "1.0.0")
-            version = "1.0.1"
+            version = "1.1.0"
 
             from(components["java"])
         }
