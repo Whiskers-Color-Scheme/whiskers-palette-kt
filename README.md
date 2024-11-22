@@ -36,10 +36,10 @@ dependencyResolutionManagement {
 On your app gradle add:
 ```gradle
 //If you use Groovy DSL
-implementation 'com.github.Whiskers-Color-Scheme:whiskers-palette-kt:1.0.1'
+implementation 'com.github.Whiskers-Color-Scheme:whiskers-palette-kt:1.1.0'
 
 //If you use Kotlin DSL
-implementation ("com.github.Whiskers-Color-Scheme:whiskers-palette-kt:1.0.1")
+implementation ("com.github.Whiskers-Color-Scheme:whiskers-palette-kt:1.1.0")
 ```
 
 
