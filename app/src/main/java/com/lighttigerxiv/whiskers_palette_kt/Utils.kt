@@ -1,8 +1,8 @@
 package com.lighttigerxiv.whiskers_palette_kt
 
 import androidx.compose.ui.graphics.Color
+import com.lighttigerxiv.whiskers_palette_kt.Color as WhColor
 
-
-fun getComposeColor(color: com.lighttigerxiv.whiskers_palette_kt.Color): Color{
+fun getComposedColor(color: WhColor): Color{
     return Color(color.asLong())
 }

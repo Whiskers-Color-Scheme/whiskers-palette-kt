@@ -9,7 +9,13 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource.Companion.SideEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+import com.lighttigerxiv.whiskers_palette_kt.Palette
+import com.lighttigerxiv.whiskers_palette_kt.getTigerPalette
 
 private val DarkColorScheme = darkColorScheme(
         primary = Purple80,
@@ -36,8 +42,8 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun WhiskersPaletteKtTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
-        // Dynamic color is available on Android 12+
         dynamicColor: Boolean = true,
+        palette: Palette,
         content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -48,6 +54,14 @@ fun WhiskersPaletteKtTheme(
 
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
+    }
+
+    val view = LocalView.current
+    val useLightModeBar = palette.neutral == getTigerPalette().neutral
+
+    SideEffect {
+        val window = (view.context as Activity).window
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = useLightModeBar
     }
 
     MaterialTheme(

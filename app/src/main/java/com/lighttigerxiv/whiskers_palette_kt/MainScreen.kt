@@ -16,9 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -31,357 +30,142 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lighttigerxiv.layout_scaffold.LayoutScaffold
-import com.lighttigerxiv.whiskers_palette_kt.ui.theme.ChangeNavigationBarsColor
-import com.lighttigerxiv.whiskers_palette_kt.ui.theme.ChangeStatusBarColor
+import com.lighttigerxiv.whiskers_palette_kt.MainViewModel.Companion.Action
+import com.lighttigerxiv.whiskers_palette_kt.Color as WhColor
 
 @Composable
-fun MainScreen(vm: MainViewModel = viewModel()) {
-    val uiState = vm.uiState.collectAsState().value
-    val textColor = getComposeColor(uiState.palette.text)
-    val neutralTwoColor = getComposeColor(uiState.palette.neutralTwo)
-    val neutralForColor = getComposeColor(uiState.palette.neutralFour)
-
-    ChangeStatusBarColor(color = neutralTwoColor)
-    ChangeNavigationBarsColor(color = neutralForColor)
+fun MainScreen(vm: MainViewModel) {
+    val state = vm.state.collectAsState().value
+    val palette = state.palette
 
     LayoutScaffold(
-        portraitNavigationBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp)
-                    .background(getComposeColor(uiState.palette.neutralFour)),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-
-                Box(
+        navigationBar = { _, inLandscape ->
+            if (inLandscape) {
+                Column(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .fillMaxWidth()
-                        .weight(1f, fill = true)
-                        .clickable { vm.switchToPanther() },
-                    contentAlignment = Alignment.Center
+                        .padding(8.dp),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    NavbarTab(
-                        iconId = R.drawable.panther,
-                        text = "Panther",
-                        active = uiState.tab == 0,
-                        textColor = textColor
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(1f, fill = true)
+                            .clip(CircleShape)
+                            .clickable {
+                                vm.onAction(Action.OnSetTigerPalette)
+                            }
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "\uD83D\uDC05 \nTiger",
+                            color = getComposedColor(palette.text),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(1f, fill = true)
+                            .clip(CircleShape)
+                            .clickable {
+                                vm.onAction(Action.OnSetPantherPalette)
+                            }
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "\uD83D\uDC08\u200D⬛ \nPanther",
+                            color = getComposedColor(palette.text),
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth()
-                        .weight(1f, fill = true)
-                        .clickable { vm.switchToTiger() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    NavbarTab(
-                        iconId = R.drawable.tiger,
-                        text = "Tiger",
-                        active = uiState.tab == 1,
-                        textColor = textColor
-                    )
-                }
-            }
-        },
-        landscapeNavigationBar = {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(100.dp)
-                    .background(getComposeColor(uiState.palette.neutralFour)),
-                verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                Box(
+            } else {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight()
-                        .weight(1f, fill = true)
-                        .clickable { vm.switchToPanther() },
-                    contentAlignment = Alignment.Center
+                        .padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    NavbarTab(
-                        iconId = R.drawable.panther,
-                        text = "Panther",
-                        active = uiState.tab == 0,
-                        textColor = textColor,
-                        vertical = true
-                    )
-                }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f, fill = true)
+                            .clip(CircleShape)
+                            .clickable {
+                                vm.onAction(Action.OnSetTigerPalette)
+                            }
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "\uD83D\uDC05 \nTiger",
+                            color = getComposedColor(palette.text),
+                            textAlign = TextAlign.Center
+                        )
+                    }
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
-                        .weight(1f, fill = true)
-                        .clickable { vm.switchToTiger() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    NavbarTab(
-                        iconId = R.drawable.tiger,
-                        text = "Tiger",
-                        active = uiState.tab == 1,
-                        textColor = textColor,
-                        vertical = true
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f, fill = true)
+                            .clip(CircleShape)
+                            .clickable {
+                                vm.onAction(Action.OnSetPantherPalette)
+                            }
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "\uD83D\uDC08\u200D⬛ \nPanther",
+                            color = getComposedColor(palette.text),
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
         }
-    ) { isTablet, inLandscape ->
-
+    ) { _, _ ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(getComposeColor(uiState.palette.neutralTwo))
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            item {
-                Text(
-                    text = if (uiState.tab == 0) "Panther" else "Tiger",
-                    color = getComposeColor(uiState.palette.text),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Medium
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-            item {
+            items(
+                items = palette.colors(),
+                key = { it.hex }
+            ) { color ->
                 ColorPreview(
-                    paletteColor = uiState.palette.banana,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.blueberry,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.cherry,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.grape,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.kiwi,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.tangerine,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutral,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralTwo,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralThree,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralFour,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralFive,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralSix,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralSeven,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.neutralEight,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.text,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.textTwo,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.textThree,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-                ColorPreview(
-                    paletteColor = uiState.palette.textFour,
-                    background = neutralForColor,
-                    textColor = textColor,
-                    secondaryBackground = neutralTwoColor,
-                    mainViewModel = vm
+                    whColor = color,
+                    textColor = getComposedColor(palette.text),
+                    background = getComposedColor(palette.neutralFour),
+                    secondaryBackground = getComposedColor(palette.neutralSix),
+                    onCopy = { text ->
+                        vm.onAction(Action.OnCopy(text))
+                    }
                 )
             }
         }
     }
-}
-
-@Composable
-fun NavbarTab(
-    iconId: Int,
-    text: String,
-    active: Boolean,
-    textColor: Color,
-    vertical: Boolean = false
-) {
-    if(vertical){
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                modifier = Modifier.size(28.dp),
-                painter = painterResource(id = iconId),
-                contentDescription = null,
-                tint = textColor
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = text,
-                fontSize = 20.sp,
-                color = textColor,
-                fontWeight = if (active) FontWeight.Bold else FontWeight.Normal
-            )
-        }
-    } else{
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                modifier = Modifier.size(28.dp),
-                painter = painterResource(id = iconId),
-                contentDescription = null,
-                tint = textColor
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(
-                text = text,
-                fontSize = 20.sp,
-                color = textColor,
-                fontWeight = if (active) FontWeight.Bold else FontWeight.Normal
-            )
-        }
-    }
-
-
 }
 
 @Composable
 fun ColorPreview(
-    paletteColor: com.lighttigerxiv.whiskers_palette_kt.Color,
+    whColor: WhColor,
     textColor: Color,
     background: Color,
     secondaryBackground: Color,
-    mainViewModel: MainViewModel
+    onCopy: (text: String) -> Unit
 ) {
 
     Row(
@@ -397,7 +181,7 @@ fun ColorPreview(
                 .fillMaxHeight()
                 .width(32.dp)
                 .clip(CircleShape)
-                .background(getComposeColor(paletteColor))
+                .background(getComposedColor(whColor))
                 .border(1.dp, secondaryBackground, CircleShape)
         )
 
@@ -405,7 +189,7 @@ fun ColorPreview(
 
         Column {
 
-            Text(text = paletteColor.name, color = textColor)
+            Text(text = whColor.name, color = textColor)
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -430,7 +214,7 @@ fun ColorPreview(
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
-                    text = paletteColor.hex,
+                    text = whColor.hex,
                     color = textColor
                 )
 
@@ -438,7 +222,7 @@ fun ColorPreview(
 
                 Box(
                     modifier = Modifier
-                        .clickable { mainViewModel.copyText(paletteColor.hex) }
+                        .clickable { onCopy(whColor.hex) }
                         .clip(RoundedCornerShape(8.dp))
                         .background(background)
                         .padding(4.dp),
@@ -476,7 +260,7 @@ fun ColorPreview(
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
-                    text = paletteColor.rgb.rgb,
+                    text = whColor.rgb.rgb,
                     color = textColor
                 )
 
@@ -484,7 +268,7 @@ fun ColorPreview(
 
                 Box(
                     modifier = Modifier
-                        .clickable { mainViewModel.copyText(paletteColor.rgb.rgb) }
+                        .clickable { onCopy(whColor.rgb.rgb) }
                         .clip(RoundedCornerShape(8.dp))
                         .background(background)
                         .padding(4.dp),
@@ -522,7 +306,7 @@ fun ColorPreview(
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
-                    text = paletteColor.hsl.hsl,
+                    text = whColor.hsl.hsl,
                     color = textColor
                 )
 
@@ -530,7 +314,7 @@ fun ColorPreview(
 
                 Box(
                     modifier = Modifier
-                        .clickable { mainViewModel.copyText(paletteColor.hsl.hsl) }
+                        .clickable { onCopy(whColor.hsl.hsl) }
                         .clip(RoundedCornerShape(8.dp))
                         .background(background)
                         .padding(4.dp),

@@ -13,32 +13,53 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(private val application: Application) : AndroidViewModel(application) {
 
-    val context = application
+    companion object {
+        data class State(
+            val palette: Palette = getTigerPalette()
+        )
 
-    data class UiState(
-        val palette: Palette,
-        val tab: Int
-    )
-
-    private val _uiState = MutableStateFlow(UiState(palette = getPantherPalette(), tab = 0))
-    val uiState = _uiState.asStateFlow()
-
-    fun switchToPanther() {
-        viewModelScope.launch(Dispatchers.Main) {
-            _uiState.update { it.copy(palette = getPantherPalette(), tab = 0) }
+        sealed class Action {
+            data object OnSetTigerPalette : Action()
+            data object OnSetPantherPalette : Action()
+            data class OnCopy(val text: String) : Action()
         }
     }
 
-    fun switchToTiger() {
-        viewModelScope.launch(Dispatchers.Main) {
-            _uiState.update { it.copy(palette = getTigerPalette(), tab = 1) }
+    private val _state = MutableStateFlow(State())
+    val state = _state.asStateFlow()
+
+    fun onAction(action: Action) {
+        when (action) {
+            is Action.OnCopy -> {
+                copyText(action.text)
+            }
+
+            Action.OnSetPantherPalette -> {
+                setPantherPalette()
+            }
+
+            Action.OnSetTigerPalette -> {
+                setTigerPalette()
+            }
         }
     }
 
-    fun copyText(text: String) {
-        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    private fun copyText(text: String) {
+        val clipboard = application.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboard.setPrimaryClip(ClipData.newPlainText(text, text))
+    }
+
+    private fun setPantherPalette() {
+        _state.update {
+            it.copy(palette = getPantherPalette())
+        }
+    }
+
+    private fun setTigerPalette() {
+        _state.update {
+            it.copy(palette = getTigerPalette())
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.lighttigerxiv.whiskers_palette_kt
 import com.google.gson.Gson
 
 /**
- * An object containing all Whiskers Colors
+ * An object containing all colors of a Whiskers Palette
  */
 data class Palette(
     val banana: Color,
@@ -24,7 +24,33 @@ data class Palette(
     val textTwo: Color,
     val textThree: Color,
     val textFour: Color
-)
+){
+    /**
+     * Returns a list of colors of the palette
+     */
+    fun colors(): List<Color>{
+        return listOf(
+            banana,
+            blueberry,
+            cherry,
+            grape,
+            kiwi,
+            tangerine,
+            neutral,
+            neutralTwo,
+            neutralThree,
+            neutralFour,
+            neutralFive,
+            neutralSix,
+            neutralSeven,
+            neutralEight,
+            text,
+            textTwo,
+            textThree,
+            textFour
+        )
+    }
+}
 
 
 /**
